@@ -14,7 +14,7 @@ def on_connect(client, userdata, flags, rc):
 
 if __name__ == '__main__':
     #get IP address
-    ip_address=0 
+    ip_address = socket.gethostbyname(socket.gethostname())
     """your code here"""
     #create a client object
     client = mqtt.Client()
@@ -41,11 +41,58 @@ if __name__ == '__main__':
 
     while True:
         #replace user with your USC username in all subscriptions
-        client.publish("user/ipinfo", f"{ip_address}")
+        client.publish("appelhan/ipinfo", f"{ip_address}")
         print("Publishing ip address")
-        time.sleep(4)
+        # time.sleep(4)
 
         #get date and time 
         """your code here"""
+        info = time.localtime()
+        
+        if (info.tm_hour < 10):
+            time_data = "0" + str(info.tm_hour) + ":"
+        else:
+            time_data = str(info.tm_hour) + ":"
+
+        if (info.tm_min < 10):
+            time_data += "0" + str(info.tm_min) + ":"
+        else:
+            time_data += str(info.tm_min) + ":"
+
+        if (info.tm_sec < 10):
+            time_data += "0" + str(info.tm_sec)
+        else:
+            time_data += str(info.tm_sec)
+
+        
+        if (info.tm_year < 10):
+            date = "0" + str(info.tm_year) + "-"
+        else:
+            date = str(info.tm_year) + "-"
+
+        if (info.tm_mon < 10):
+            date += "0" + str(info.tm_mon) + "-"
+        else:
+            date += str(info.tm_mon) + "-"
+
+        if (info.tm_mday < 10):
+            date += "0" + str(info.tm_mday)
+        else:
+            date += str(info.tm_mday)
+
+
         #publish date and time in their own topics
         """your code here"""
+
+        client.publish("appelhan/time", f"{time_data}")
+        print("Publishing time")
+
+        client.publish("appelhan/date", f"{date}")
+        print("Publishing date")
+
+        # client.publish("appelhan/random", f"random info")
+
+        print("")
+
+        time.sleep(4)
+
