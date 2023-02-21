@@ -49,6 +49,7 @@ if __name__ == '__main__':
         """your code here"""
         info = time.localtime()
         
+        # If statements to add leading 0s to single digit time values
         if (info.tm_hour < 10):
             time_data = "0" + str(info.tm_hour) + ":"
         else:
@@ -64,7 +65,7 @@ if __name__ == '__main__':
         else:
             time_data += str(info.tm_sec)
 
-        
+        # If statements to add leading 0s to single digit date values
         if (info.tm_year < 10):
             date = "0" + str(info.tm_year) + "-"
         else:
@@ -92,7 +93,7 @@ if __name__ == '__main__':
 
         # client.publish("appelhan/random", f"random info")
 
-        print("")
+#        print("")
 
         time.sleep(4)
 
